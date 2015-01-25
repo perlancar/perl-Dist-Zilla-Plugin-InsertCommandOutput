@@ -17,6 +17,8 @@ with (
     },
 );
 
+has verbatim => (is => 'rw', default => sub{1});
+
 use namespace::autoclean;
 
 sub munge_files {
@@ -58,6 +60,7 @@ __PACKAGE__->meta->make_immutable;
 In dist.ini:
 
  [InsertCommandOutput]
+ ;verbatim=1
 
 In your POD:
 
@@ -68,7 +71,8 @@ In your POD:
 
 This module finds C<# COMMAND: ...> directives in your POD, pass it to the
 Perl's backtick operator, and insert the result into your POD as a verbatim
-paragraph. If command fails (C<$?> is non-zero), build will be aborted.
+paragraph (unless when you set C<verbatim> to 0, in which case output will be
+inserted as-is). If command fails (C<$?> is non-zero), build will be aborted.
 
 
 =head1 SEE ALSO

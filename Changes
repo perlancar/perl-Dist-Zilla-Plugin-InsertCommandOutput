@@ -1,5 +1,11 @@
 Revision history for Dist-Zilla-Plugin-InsertCommandOutput
 
+0.03    2015-01-25 (PERLANCAR)
+
+	- Add option: verbatim, to allow inserting command output as-is
+	  (e.g. raw POD) when set to 0.
+
+
 0.02     2014-12-12 (PERLANCAR)
 
          - Rename module/dist from Dist-Zilla-Plugin-InsertCommandResult to

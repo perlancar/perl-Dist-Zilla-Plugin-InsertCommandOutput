@@ -17,7 +17,7 @@ with (
     },
 );
 
-has verbatim => (is => 'rw', default => sub{1});
+has make_verbatim => (is => 'rw', default => sub{1});
 
 use namespace::autoclean;
 
@@ -45,7 +45,7 @@ sub _command_output {
         die "Command '$cmd' failed: " . explain_child_error();
     }
 
-    $res =~ s/^/ /gm;
+    $res =~ s/^/ /gm if $self->make_verbatim;
     $res;
 }
 
@@ -60,7 +60,7 @@ __PACKAGE__->meta->make_immutable;
 In dist.ini:
 
  [InsertCommandOutput]
- ;verbatim=1
+ ;make_verbatim=1
 
 In your POD:
 
@@ -71,7 +71,7 @@ In your POD:
 
 This module finds C<# COMMAND: ...> directives in your POD, pass it to the
 Perl's backtick operator, and insert the result into your POD as a verbatim
-paragraph (unless when you set C<verbatim> to 0, in which case output will be
+paragraph (unless if you set C<make_verbatim> to 0, in which case output will be
 inserted as-is). If command fails (C<$?> is non-zero), build will be aborted.
 
 

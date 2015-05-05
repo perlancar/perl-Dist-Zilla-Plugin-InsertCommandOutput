@@ -1,5 +1,13 @@
 Revision history for Dist-Zilla-Plugin-InsertCommandOutput
 
+0.04    2015-05-05 (PERLANCAR)
+
+	- [Incompatible change] Rename option 'verbatim' to 'make_verbatim' to
+          make it less ambiguous.
+
+        - [Bugfix] The 'verbatim' option (now 'make_verbatim') didn't work :)
+
+
 0.03    2015-01-25 (PERLANCAR)
 
 	- Add option: verbatim, to allow inserting command output as-is

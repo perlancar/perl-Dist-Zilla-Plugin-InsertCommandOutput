@@ -31,7 +31,7 @@ sub munge_file {
     my ($self, $file) = @_;
     my $content = $file->content;
     if ($content =~ s{^#\s*COMMAND:\s*(.*)\s*$}{$self->_command_output($1)."\n"}egm) {
-        $self->log(["inserting output of command '%s' in %s", $1, $file->name]);
+        $self->log(["inserting output of command '%s' in %s: '%s'", $1, $file->name, $content]);
         $file->content($content);
     }
 }

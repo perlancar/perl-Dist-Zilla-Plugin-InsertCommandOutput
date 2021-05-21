@@ -1,6 +1,8 @@
 package Dist::Zilla::Plugin::InsertCommandOutput;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -30,7 +32,11 @@ sub munge_files {
 sub munge_file {
     my ($self, $file) = @_;
     my $content_as_bytes = $file->encoded_content;
-    if ($content_as_bytes =~ s{^#\s*COMMAND:\s*(.*)\s*$}{$self->_command_output($1)."\n"}egm) {
+    if ($content_as_bytes =~ s{^#\s*COMMAND:\s*(.*)\s*(\R|\z)}{
+        my $output = $self->_command_output($1);
+        $output .= "\n" unless $output =~ /\R\z/;
+        $output;
+    }egm) {
         $self->log(["inserting output of command '%s' in %s", $1, $file->name]);
         $self->log_debug(["output of command: %s", $content_as_bytes]);
         $file->encoded_content($content_as_bytes);
